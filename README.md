@@ -1,5 +1,5 @@
 husc
-=======
+====
 
 A simple crawling utility for Ruby.
 
@@ -19,7 +19,7 @@ This project enables site crawling and data extraction with xpath and css select
 require 'husc'
 
 url = 'http://www.example.com/'
-doc = Husc::Crawler(url)
+doc = Husc.new(url)
 
 # access another url
 doc.get('another url')
@@ -56,7 +56,7 @@ doc.css('p').innerText() # => string object
 ### Submitting Form Example
 1. Specify target node's attribute
 2. Specify value(int or str) / check(bool) / file_name(str)
-3. call submit() with form attribute specified
+3. Call submit() with form attribute specified
 ```ruby
 # login
 doc.send(id:'id attribute', value:'value to send')
