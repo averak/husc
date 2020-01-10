@@ -49,7 +49,7 @@ doc.xpath('//*[@id="top"]/div[1]')
 
 # other example
 doc.css('div').css('a')[2].attr('href') # => string object
-doc.css('p').innerText() # => string object
+doc.css('p').inner_text() # => string object
 # You do not need to specify "[]" to access the first index
 ```
 
@@ -74,8 +74,6 @@ doc.send(id:'id attribute', check:False) # uncheck
 doc.send(name:'name attribute', value:'hello')
 doc.send(class:'class attribute', value:100)
 ```
-
-
 
 
 ## Installation
