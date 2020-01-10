@@ -3,11 +3,12 @@ require 'mechanize'
 require 'nokogiri'
 require 'net/http'
 require 'kconv'
-require "husc/version"
+require 'husc/version'
 
 module Husc
   class Error < StandardError; end
-  class Husc
+
+  class Crawler
     attr_reader :url, :html, :tables, :params
 
     # 特殊配列
@@ -28,7 +29,7 @@ module Husc
 
       def method_missing(method, *args)
         if self == []
-          return eval("Husc.new(doc: nil).#{method}(*#{args})")
+          return eval("Crawler.new(doc: nil).#{method}(*#{args})")
         end
 
         return eval("self[0].#{method}(*#{args})")
@@ -118,7 +119,7 @@ module Husc
 
     def xpath(locator, single = false)
       ## -----*----- HTMLからXPath指定で要素取得 -----*----- ##
-      elements = CrawlArray.new(@doc.xpath(locator).map {|el| Husc.new(doc: el)})
+      elements = CrawlArray.new(@doc.xpath(locator).map {|el| Crawler.new(doc: el)})
       if single
         # シングルノード
         if elements[0] == nil
@@ -134,7 +135,7 @@ module Husc
 
     def css(locator, single = false)
       ## -----*----- HTMLからCSSセレクタで要素取得 -----*----- ##
-      elements = CrawlArray.new(@doc.css(locator).map {|el| Husc.new(doc: el)})
+      elements = CrawlArray.new(@doc.css(locator).map {|el| Crawler.new(doc: el)})
       if single
         # シングルノード
         if elements[0] == nil
@@ -211,3 +212,4 @@ module Husc
     end
   end
 end
+
