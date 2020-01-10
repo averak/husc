@@ -19,7 +19,7 @@ This project enables site crawling and data extraction with xpath and css select
 require 'husc'
 
 url = 'http://www.example.com/'
-doc = Husc(url)
+doc = Husc::Crawler(url)
 
 # access another url
 doc.get('another url')
