@@ -86,4 +86,4 @@ $ gem install husc
 
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at [https://github.com/AjxLab/PyCrawl](https://github.com/AjxLab/PyCrawl).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/AjxLab/husc](https://github.com/AjxLab/husc).
