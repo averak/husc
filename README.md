@@ -1,4 +1,4 @@
-Husc
+husc
 =======
 
 A simple crawling utility for Ruby.
