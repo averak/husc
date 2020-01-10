@@ -158,6 +158,15 @@ class Husc
     end
   end
 
+  def inner_html(shaping = true)
+    ## -----*----- タグ内のHTMLを取得 -----*----- ##
+    if shaping
+      return shaping_string(@doc.inner_html)
+    else
+      @doc.inner_html
+    end
+  end
+
   def text(shaping = true)
     ## -----*----- タグ内の文字列（その他タグ除去）を取得 -----*----- ##
     if shaping

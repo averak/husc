@@ -14,6 +14,16 @@ This project enables site crawling and data extraction with xpath and css select
 
 
 ## Usage
+### Description of Instance Methods
+name       | Description
+-----------|----------------------------------------------
+send       | Set the value you want to submit to the form.
+submit     | Submit form.
+css        | Get node by css selector.
+xpath      | Get node by xpath.
+attr       | Get node's attribute.
+inner_text | Get node's inner text.
+
 ### Simple Example
 ```ruby
 require 'husc'
