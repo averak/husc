@@ -2,6 +2,7 @@ husc
 ====
 
 [![Gem Version](https://badge.fury.io/rb/husc.svg)](https://rubygems.org/gems/husc/)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE.txt)
 
 A simple crawling utility for Ruby.
 
