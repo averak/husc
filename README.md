@@ -1,6 +1,8 @@
 husc
 ====
 
+[![Gem Version](https://badge.fury.io/rb/husc.svg)](https://rubygems.org/gems/husc/)
+
 A simple crawling utility for Ruby.
 
 
