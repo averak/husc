@@ -1,0 +1,16 @@
+current directory: /Users/abetatsuya/ruby/husc/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.6/ext/unf_ext
+/Users/abetatsuya/.rbenv/versions/2.7.0/bin/ruby -I /Users/abetatsuya/.rbenv/versions/2.7.0/lib/ruby/2.7.0 -r ./siteconf20200302-41129-qdasgz.rb extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /Users/abetatsuya/ruby/husc/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.6/ext/unf_ext
+make "DESTDIR=" clean
+
+current directory: /Users/abetatsuya/ruby/husc/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.6/ext/unf_ext
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.bundle
+
+current directory: /Users/abetatsuya/ruby/husc/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.6/ext/unf_ext
+make "DESTDIR=" install
+/usr/local/bin/ginstall -c -m 0755 unf_ext.bundle ./.gem.20200302-41129-1opykk1
