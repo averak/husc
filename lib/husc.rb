@@ -36,10 +36,12 @@ class Husc
     end
   end
 
-  def initialize(url = nil, doc: nil, html: nil)
+  def initialize(url = nil, doc: nil, html: nil, user_agent: nil, request_headers: nil)
     ## -----*----- コンストラクタ -----*----- ##
     @agent = Mechanize.new
     @agent.keep_alive = false
+    @agent.user_agent = user_agent  unless user_agent.nil?
+    @agent.request_headers = request_headers  unless request_headers.nil?
 
     if !url.nil?
       get(url)
