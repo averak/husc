@@ -32,7 +32,7 @@ class Husc
         return eval("Husc.new(doc: nil).#{method}(*#{args})")
       end
 
-      return eval("self[0].method}(*#{args})")
+      return eval("self[0].#{method}(*#{args})")
     end
   end
 
