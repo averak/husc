@@ -9,7 +9,7 @@ require 'husc/version'
 class Husc
   class Error < StandardError; end
 
-  attr_reader :url, :html, :tables, :params
+  attr_reader :url, :html, :tables, :params, :code
 
   # 特殊配列
   class CrawlArray < Array
@@ -32,16 +32,17 @@ class Husc
         return eval("Husc.new(doc: nil).#{method}(*#{args})")
       end
 
-      return eval("self[0].#{method}(*#{args})")
+      return eval("self[0].method}(*#{args})")
     end
   end
 
-  def initialize(url = nil, doc: nil, html: nil, user_agent: nil, request_headers: nil)
+  def initialize(url = nil, doc: nil, html: nil, user_agent: nil, request_headers: nil, timeout: 10)
     ## -----*----- コンストラクタ -----*----- ##
     @agent = Mechanize.new
     @agent.keep_alive = false
     @agent.user_agent = user_agent  unless user_agent.nil?
     @agent.request_headers = request_headers  unless request_headers.nil?
+    @agent.read_timeout = timeout
 
     if !url.nil?
       get(url)
@@ -60,7 +61,14 @@ class Husc
   def get(url)
     ## -----*----- ページ推移 -----*----- ##
     @url = url
-    page = @agent.get(@url)
+    begin
+      page = @agent.get(@url)
+      @code = page.code
+    rescue Mechanize::ResponseCodeError => e
+      @code = e.page.body
+    rescue Net::HTTP::Persistent::Error => e
+      puts e
+    end
     html = page.content.toutf8
     update_params(html)
   end
@@ -218,3 +226,4 @@ class Husc
     return str.gsub(" ", ' ').squeeze(' ').gsub("\n \n", "\n").gsub("\n ", "\n").gsub("\r", "\n").squeeze("\n").gsub("\t", "").strip
   end
 end
+
