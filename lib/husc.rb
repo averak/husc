@@ -81,57 +81,58 @@ class Husc
     # ファイルアップロード  => file（String）を指定
     # ボタンクリック        => click(Bool)を指定
     @params << {}
-    opts.each {|key, value| @params[-1][key.to_sym] = value}
+    opts = opts.map { |k, v| [k.to_sym, v] }.to_h
+    opts.each { |k, v| @params[-1][k.to_sym] = v }
   end
 
-  def submit(url = @url, opt)
+  def submit(opts)
     ## -----*----- フォーム送信 -----*----- ##
-    @agent.get(url) do |page|
-      # フォーム指定
-      if opt.kind_of?(Integer)
-        form = page.forms[opt]
-      else
-        form = page.form(**opt)
-      end
-      return if form.nil?
-
-      @params.each do |param|
-        # テキスト，数値など
-        if param.include?(:value) && !param.include?(:check)
-          value = param.delete(:value)
-          next if value.nil?
-          form.field_with(**param).value = value unless form.field_with(**param).nil?
-        end
-
-        # チェックボックス
-        if param.include?(:check)
-          check = param.delete(:check)
-          next if check.nil?
-          if check
-            form.checkbox_with(**param).check unless form.checkbox_with(**param).nil?
-          else
-            form.checkbox_with(**param).uncheck unless form.checkbox_with(**param).nil?
-          end
-        end
-
-        # ファイルアップロード
-        if param.include?(:file)
-          file = param.delete(:file)
-          next if file.nil? || !File.exist?(file)
-          form.file_upload_with(**param).file_name = file unless form.file_upload_with(**param).nil?
-        end
-
-        # ボタンクリック
-        if param.include?(:click)
-          click = param.delete(:click)
-          next unless click
-          form.button_with(**param) unless form.button_with(**param).nil?
-        end
-      end
-
-      form = form.submit
-      update_params(form.content.toutf8)
+    # フォーム指定
+    opts = opts.map { |k,v| [k.to_sym, v] }.to_h
+    if opts.kind_of?(Integer)
+      form = @agent.page.forms[opts]
+    else
+      form = @agent.page.form(**opts)
     end
+    return if form.nil?
+    button = nil
+
+    @params.each do |param|
+      # テキスト，数値など
+      if param.include?(:value) && !param.include?(:check)
+        value = param.delete(:value)
+        next if value.nil?
+        form.field_with(**param).value = value unless form.field_with(**param).nil?
+      end
+
+      # チェックボックス
+      if param.include?(:check)
+        check = param.delete(:check)
+        next if check.nil?
+        if check
+          form.checkbox_with(**param).check unless form.checkbox_with(**param).nil?
+        else
+          form.checkbox_with(**param).uncheck unless form.checkbox_with(**param).nil?
+        end
+      end
+
+      # ファイルアップロード
+      if param.include?(:file)
+        file = param.delete(:file)
+        next if file.nil? || !File.exist?(file)
+        form.file_upload_with(**param).file_name = file unless form.file_upload_with(**param).nil?
+      end
+
+      # ボタンクリック
+      if param.include?(:click)
+        click = param.delete(:click)
+        next unless click
+        button = form.button_with(**param) unless form.button_with(**param).nil?
+      end
+    end
+
+    form = @agent.submit(form, button)
+    update_params(form.content.toutf8)
     @params = []
   end
 
