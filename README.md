@@ -81,8 +81,13 @@ doc.submit(id:'id attribute') # submit
 doc.send(id:'id attribute', file_name:'target file name')
 
 # checkbox
-doc.send(id:'id attribute', check:True)  # check
-doc.send(id:'id attribute', check:False) # uncheck
+doc.send(id:'id attribute', check:true)  # check
+doc.send(id:'id attribute', check:false) # uncheck
+
+# button click
+doc.send(id:'id attribute', button:true)  # click
+doc.send(id:'id attribute', button:false) # unclick
+
 
 # example of specify other attribute
 doc.send(name:'name attribute', value:'hello')
