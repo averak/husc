@@ -79,6 +79,7 @@ class Husc
     # テキスト，数値など　  => value（String）を指定
     # チェックボックス　　  => check（Bool）を指定
     # ファイルアップロード  => file（String）を指定
+    # ボタンクリック        => button(Bool)を指定
     @params << {}
     opts.each {|key, value| @params[-1][key.to_sym] = value}
   end
@@ -118,6 +119,13 @@ class Husc
           file = param.delete(:file)
           next if file.nil? || !File.exist?(file)
           form.file_upload_with(**param).file_name = file unless form.file_upload_with(**param).nil?
+        end
+
+        # ボタンクリック
+        if param.include?(:button)
+          button = param.delete(:button)
+          next unless button
+          form.button_with(**param) unless form.button_with(**param).nil?
         end
       end
 
