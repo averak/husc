@@ -85,8 +85,8 @@ doc.send(id:'id attribute', check:true)  # check
 doc.send(id:'id attribute', check:false) # uncheck
 
 # button click
-doc.send(id:'id attribute', button:true)  # click
-doc.send(id:'id attribute', button:false) # unclick
+doc.send(id:'id attribute', click:true)  # click
+doc.send(id:'id attribute', click:false) # unclick
 
 
 # example of specify other attribute
