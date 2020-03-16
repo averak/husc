@@ -211,7 +211,11 @@ class Husc
 
   def update_params(html)
     ## -----*----- パラメータを更新 -----*----- ##
-    @url = @agent.page.uri
+    if @agent.respond_to?(:uri)
+      @url = @agent.page.uri
+    else
+      @url = ''
+    end
     @html = html
     @doc = Nokogiri::HTML.parse(@html)
     table_to_hash
